@@ -1,0 +1,66 @@
+defaults:
+  - base
+  - _self_
+  - server: star04
+  - algo: pbt_step15e5
+
+general:
+  exp_name: '${algo.name}_humanoid_12'
+  exp_desc: '100 steps | full'
+  seed_base: 71173
+
+  num_cpus: 1
+  num_gpus: 0.33
+
+task:
+  _target_: task.brax_task.BraxTask
+  num_evals_per_step: ${algo.num_evals_per_step}
+  viz: False
+  num_envs: 512 #try to avoid OOM
+
+  name: humanoid
+
+  optimizer:
+    name: Adam
+    lr: 3e-4
+    weight_decay: 0.0
+
+search_space:
+  _target_: search_space.cs.ConfigSpaceSearchSpace
+  hyperparameters:
+    - name: log10_lr
+      type: Float
+      distribution: Uniform
+      bounds: [ -4, -3 ]
+    - name: discounting
+      type: Float
+      distribution: Uniform
+      bounds: [ 0.9, 0.9999 ]
+    - name: log10_entropy_cost
+      type: Float
+      distribution: Uniform
+      bounds: [ -6, -1 ]
+    - name: reward_scaling
+      type: Float
+      distribution: Uniform
+      bounds: [ 0.05, 20 ]
+    - name: lambda_
+      type: Float
+      distribution: Uniform
+      bounds: [ 0.9, 1 ]
+    - name: ppo_epsilon
+      type: Float
+      distribution: Uniform
+      bounds: [ 0.1, 0.4 ]
+    - name: log2_batch_size
+      type: Integer
+      distribution: Uniform
+      bounds: [ 8, 10 ]
+    - name: unroll_length
+      type: Integer
+      distribution: Uniform
+      bounds: [ 5, 15 ]
+    - name: num_update_epochs
+      type: Integer
+      distribution: Uniform
+      bounds: [ 2, 8 ]

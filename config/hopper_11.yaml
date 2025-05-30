@@ -1,0 +1,34 @@
+defaults:
+  - base
+  - _self_
+  - server: star04
+  - algo: pbt_step5e6
+
+general:
+  exp_name: '${algo.name}_hopper_11'
+  exp_desc: '30 steps | lr43'
+  seed_base: 71173
+
+  num_cpus: 1
+  num_gpus: 0.33
+
+task:
+  _target_: task.brax_task.BraxTask
+  num_evals_per_step: ${algo.num_evals_per_step}
+  viz: False
+  num_envs: 512 #try to avoid OOM
+
+  name: hopper
+
+  optimizer:
+    name: Adam
+    lr: 3e-4
+    weight_decay: 0.0
+
+search_space:
+  _target_: search_space.cs.ConfigSpaceSearchSpace
+  hyperparameters:
+    - name: log10_lr
+      type: Float
+      distribution: Uniform
+      bounds: [ -4, -3 ]

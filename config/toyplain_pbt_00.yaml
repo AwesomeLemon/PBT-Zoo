@@ -1,0 +1,35 @@
+defaults:
+  - base
+  - _self_
+  - server: star04
+
+general:
+  exp_name: 'pbt_toyplain_00'
+  exp_desc: ' '
+  seed_base: 71173
+
+algo:
+  _target_: algo.pbt.PBT
+  pop_size: 22
+
+  quant_top: 0.25
+  quant_bottom: 0.25
+  perturb_factor: 2.0
+
+  t_step: 20
+  t_max: 1000
+
+task:
+  _target_: task.toy_plain.ToyPlainTask
+  t_max: ${algo.t_max}
+  noise_std: null
+
+
+search_space:
+  _target_: search_space.cs.ConfigSpaceSearchSpace
+  hyperparameters:
+    - name: lr
+      type: Float
+      distribution: Uniform
+      bounds: [ 1e-4, 1.1 ]
+      log: False

@@ -1,0 +1,12 @@
+_target_: algo.pb2rand.PB2Rand
+name: 'pb2rand'
+pop_size: 22
+
+quant_top: 0.125
+quant_bottom: 0.125
+
+min_steps_before_eval: 0
+
+t_step: 16660
+t_eval: 16660
+t_max: 49980

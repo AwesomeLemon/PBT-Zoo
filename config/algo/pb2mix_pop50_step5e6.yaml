@@ -1,0 +1,13 @@
+_target_: algo.pb2mix.PB2Mix
+name: 'pb2mix'
+pop_size: 50
+
+quant_top: 0.25
+quant_bottom: 0.25
+perturb_factor: 2.0
+
+min_steps_before_eval: 0
+
+t_step: 5_000_000
+num_evals_per_step: 1
+t_max: 150_000_000

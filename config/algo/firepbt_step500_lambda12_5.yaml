@@ -1,0 +1,18 @@
+_target_: algo.firepbt.FirePBT
+name: 'firepbt'
+pop1_size: 8
+pop2_size: 8
+popEval_size: 6
+
+quant_top: 0.125
+quant_bottom: 0.125
+perturb_factor: 2.0
+
+min_steps_before_eval:
+  1: 0
+  2: 500
+max_eval_steps: 1500
+
+t_step: 500
+t_eval: 50
+t_max: 50000

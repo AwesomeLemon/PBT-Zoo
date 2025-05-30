@@ -1,0 +1,41 @@
+defaults:
+  - base
+  - _self_
+  - server: star04
+
+general:
+  exp_name: 'firepbt_toyplain_00'
+  exp_desc: ' '
+  seed_base: 71173
+
+algo:
+  _target_: algo.firepbt.FirePBT
+  pop1_size: 8
+  pop2_size: 8
+  popEval_size: 6
+
+  quant_top: 0.25
+  quant_bottom: 0.25
+  perturb_factor: 2.0
+
+  min_steps_before_eval:
+    1: 0
+    2: 20
+  max_eval_steps: 60
+
+  t_step: 20
+  t_max: 1000
+
+task:
+  _target_: task.toy_plain.ToyPlainTask
+  t_max: ${algo.t_max}
+
+
+search_space:
+  _target_: search_space.cs.ConfigSpaceSearchSpace
+  hyperparameters:
+    - name: lr
+      type: Float
+      distribution: Uniform
+      bounds: [ 1e-4, 1.1 ]
+      log: False

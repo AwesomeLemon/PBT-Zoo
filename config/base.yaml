@@ -1,0 +1,21 @@
+path:
+  dir_my: ${oc.env:PBT_ZOO_PATH}
+  data: '${path.dir_my}/data'
+  logs: '${path.dir_my}/logs'
+  dir_exp: '${path.logs}/${general.exp_name}/${general.seed_offset}'
+  dir_ckpt: '${path.dir_exp}/checkpoints'
+
+server:
+  ray_address: '192.168.63.147:6379'
+
+general:
+  continue_auto: False
+  exp_desc: '_'
+  seed_offset: 0
+
+  num_cpus: 1
+  num_gpus: 0
+
+algo:
+  delete_old_ckpts: True
+  delete_all_ckpts_at_the_end: True

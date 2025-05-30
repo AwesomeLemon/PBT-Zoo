@@ -1,0 +1,13 @@
+_target_: algo.bgpbt.BGPBT
+name: 'bgpbt'
+pop_size: 22
+
+quant_top: 0.25
+quant_bottom: 0.25
+n_init: ${algo.pop_size}
+
+min_steps_before_eval: 0
+
+t_step: 500
+t_eval: 500
+t_max: 50000

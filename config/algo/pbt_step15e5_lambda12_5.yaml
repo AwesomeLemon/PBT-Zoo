@@ -1,0 +1,13 @@
+_target_: algo.pbt.PBT
+name: 'pbt'
+pop_size: 22
+
+quant_top: 0.125
+quant_bottom: 0.125
+perturb_factor: 2.0
+
+min_steps_before_eval: 0
+
+t_step: 1_500_000
+num_evals_per_step: 1
+t_max: 150_000_000

@@ -1,0 +1,70 @@
+defaults:
+  - base
+  - _self_
+  - server: star04
+
+general:
+  exp_name: 'bgpbt_fmnist_19'
+  exp_desc: 'search space mid | AMP'
+  seed_base: 71173
+
+  num_cpus: 1
+  num_gpus: 0.33
+
+algo:
+  _target_: algo.bgpbt.BGPBT
+  pop_size: 22
+
+  quant_top: 0.25
+  quant_bottom: 0.25
+  n_init: ${algo.pop_size}
+
+  min_steps_before_eval: 0
+
+  t_step: 500
+  t_max: 50000
+
+task:
+  _target_: task.classification_amp.ClassificationTask
+  t_eval: ${algo.t_step} # only FirePBT needs intermediate values and so has this != t_step.
+  viz: False
+  data:
+    name: FashionMnist
+    n_classes: 10
+    n_channels: 1
+    val_size: 10000
+
+    rand_aug_n_ops: 1
+    rand_aug_mag: 10
+
+    batch_size: 128
+    num_workers: 2
+
+  model:
+    _target_: model.resnet12.ResNet12
+    output_size: ${task.data.n_classes}
+    channels: ${task.data.n_channels}
+    dropblock_dropout: 0.0
+    avg_pool: True
+
+  optimizer:
+    name: SGD
+    lr: 0.1
+    momentum: 0.0
+    weight_decay: 0.0005
+
+search_space:
+  _target_: search_space.cs.ConfigSpaceSearchSpace
+  hyperparameters:
+    - name: log10_lr
+      type: Float
+      distribution: Uniform
+      bounds: [ -6, 0 ]
+    - name: rand_aug_n_ops
+      type: Integer
+      distribution: Uniform
+      bounds: [ 1, 4 ]
+    - name: rand_aug_mag
+      type: Integer
+      distribution: Uniform
+      bounds: [ 1, 30 ]

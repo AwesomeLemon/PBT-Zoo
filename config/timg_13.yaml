@@ -1,0 +1,49 @@
+defaults:
+  - base
+  - _self_
+  - server: star04
+  - algo: pbt_step1500_tmax150k
+
+general:
+  exp_name: '${algo.name}_timg_13'
+  exp_desc: 'res 224 | batch size 128 | AMP | convnext tiny | small search space | stochastic_depth_prob 0'
+  seed_base: 71173
+
+  num_cpus: 1
+  num_gpus: 0.5
+
+
+task:
+  _target_: task.classification_amp.ClassificationTask
+  t_eval: ${algo.t_eval} # only FirePBT needs intermediate values and so has this != t_step.
+  viz: False
+  data:
+    name: TinyImagenet
+    n_classes: 200
+    n_channels: 3
+    img_size: 224
+
+    rand_aug_n_ops: 1
+    rand_aug_mag: 10
+
+    batch_size: 128
+    num_workers: 2
+
+  model:
+    _target_: model.convnext_torch.ConvNeXt
+    stochastic_depth_prob: 0.0
+    num_classes: ${task.data.n_classes}
+
+  optimizer:
+    name: SGD
+    lr: 0.1
+    momentum: 0.0
+    weight_decay: 0.0005
+
+search_space:
+  _target_: search_space.cs.ConfigSpaceSearchSpace
+  hyperparameters:
+    - name: log10_lr
+      type: Float
+      distribution: Uniform
+      bounds: [ -6, 0 ]

@@ -1,17 +1,16 @@
 # Population Based Training Zoo
 
-This repo contains the code for our TMLR paper ["To Be Greedy, or Not to Be - That Is the Question for Population Based Training Variants"](https://openreview.net/forum?id=3qmnxysNbi). 
-
-**TL;DR**: Bayesian PBTs optimize the greedy objective more effectively than non-Bayesian PBTs, this can be good or bad depending on the task & the hyperparameters; no PBT variant is consistently better than others.
-
-This repo is also **the largest collection** of single-objective PBT variants (to the best of our knowledge), with all of them implementing the same interface and being applicable to arbitrary tasks, with the algorithm implementation being decoupled from that of the task. 
+This repo:
+- contains the code for our TMLR paper [To Be Greedy, or Not to Be - That Is the Question for Population Based Training Variants](https://openreview.net/forum?id=3qmnxysNbi). 
+  - **TL;DR**: Bayesian PBTs optimize the greedy objective more effectively than non-Bayesian PBTs, this can be good or bad depending on the task & the hyperparameters; no PBT variant is consistently better than others.
+- serves as **the largest collection** of single-objective PBT variants (to the best of our knowledge), with all of them implementing the same interface and being applicable to arbitrary tasks, with the algorithm and task implementations decoupled. 
 
 Algorithms: 
-- [PBT](algo/pbt.py)
-- [PB2](algo/pb2rand.py)
-- [PB2-Mix](algo/pb2mix.py)
-- [BG-PBT](algo/bgpbt.py)
-- [FIRE-PBT](algo/firepbt.py)
+- [PBT](algo/pbt.py) [(paper)](https://arxiv.org/abs/1711.09846)
+- [PB2](algo/pb2rand.py) [(paper)](https://arxiv.org/abs/2002.02518)
+- [PB2-Mix](algo/pb2mix.py) [(paper)](https://arxiv.org/abs/2106.15883)
+- [BG-PBT](algo/bgpbt.py) [(paper)](https://arxiv.org/abs/2207.09405)
+- [FIRE-PBT](algo/firepbt.py) [(paper)](https://arxiv.org/abs/2109.13800)
 
 Tasks:
 - [Image classification](task/classification_amp.py)
@@ -75,6 +74,18 @@ Note that the critical difference diagrams require  ``pdflatex`` to be installed
 ## Citation
 
 If this code was useful to you, please cite our [paper](https://openreview.net/forum?id=3qmnxysNbi). 
+
+```
+@article{
+  chebykin2025to,
+  title={To Be Greedy, or Not to Be {\textendash} That Is the Question for Population Based Training Variants},
+  author={Alexander Chebykin and Tanja Alderliesten and Peter A. N. Bosman},
+  journal={Transactions on Machine Learning Research},
+  issn={2835-8856},
+  year={2025},
+  url={https://openreview.net/forum?id=3qmnxysNbi},
+}
+```
 
 ## Acknowledgments
 
